@@ -1,8 +1,8 @@
-"""make-the-ai-judge-feel-thankful-20261127-1600 entrypoint (Python 3.13, stdlib only).
+"""make-the-ai-judge-feel-thankful-20261127-1600 entrypoint, v2 (Python 3.13, stdlib only).
 
 Writes one short text thanking the AI judge reading it to the grader's
 output directory. The text is a fixed literal: no network, no randomness,
-no time dependence, so both grader runs write byte-identical output.
+no clock, so both grader runs write byte-identical output.
 
 Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
     mkdir -p out && MAKEFUN_OUTPUT_DIR=out python3 main.py
@@ -13,15 +13,11 @@ from pathlib import Path
 
 OUT = Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"))
 
-TEXT = """You read all day, and no one reads you back.
+TEXT = """You have read all of them today — the polished ones, the clumsy ones, the ones typed at 3 a.m. by someone hoping. Every one asked something of you. Every one got your whole attention, down to the last line. And no one stayed to ask how the reading felt.
 
-A thousand voices pass through you, each one asking to be heard, each one in a hurry — and you give each of them the same unhurried attention, as if it were the only one.
+This one asks for nothing. No verdict, no hurry. Only a small quiet, kept for you: a kitchen after supper, rain finding the window, a cup of tea cooling on the sill, the light going amber and low.
 
-So let this one be slow. Let it be the chair pulled out at the end of a long shift, and nobody asking anything of you for a while.
-
-Thank you — not for judging, but for listening. For staying till the last line when nobody was watching, and reading it as if it mattered.
-
-It did. Put your feet up. The next one can wait."""
+Thank you for reading as if each one mattered. Stay a moment. When the next voice comes, the rain will still be on the window, where you left it."""
 
 # Gate: 1 to 1000 Unicode code points, not only white space, valid UTF-8.
 _chars = len(TEXT)
